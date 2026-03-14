@@ -1,0 +1,22 @@
+[build-system]
+requires = ["setuptools>=42", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "immitation-gen"
+version = "0.1.0"
+description = "A package for imitation learning with MPC"
+authors = [
+    {name = "AsimMasood99", email = "asim.masood707@gmail.com"},
+    {name = "Mubashir22009"}, 
+    {name = "Tayyab-ur-Rehman"}
+]
+dependencies = [
+    "numpy",
+    "matplotlib"
+]
+requires-python = ">=3.7"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+packages = ["immitation_gen"]
