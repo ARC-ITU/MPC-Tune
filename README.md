@@ -2,15 +2,16 @@
 ---
 
 ## Introduction
-Weight tuning for MPC cost functions using Monte-Carlo Expectation Maximization (MCEM)
-This project fine-tunes the cost-function weights of a **Model Predictive Controller (MPC)** using **Expectation Maximisation (EM)**-based probabilistic policy search.
+MPC-Tune fine-tunes the cost-function weights of a **Model Predictive Controller (MPC)** using **Expectation Maximisation (EM)**-based probabilistic policy search, where a **reward function** guides the tuning process.
 
-The core idea is straightforward:
+MPC-Tune Initialization:
+- User chooses a population size `N`.
+- User defines a reward function. (This is any metric that is defined over the MPC trajectroy)
+- User defines an initial Gaussian policy over the weight space by choosing appropriate $\mu$ & $\sigma$ for all learnable weights. (The gaussian policy is iteratively updated)
 
-1. A baseline MPC rollout is performed with hand-tuned weights, producing a **reference trajectory**.
-2. A Gaussian policy over the weight space is initialised and iteratively updated.
-3. At each iteration, `N` weight vectors are sampled from the policy, the MPC is rolled out for each, and a reward is computed as the negative trajectory distance from the reference.
-4. The EM update step re-fits the Gaussian to the best-performing samples, converging the policy mean towards weights that best **imitate** the reference behaviour.
+MPC-Tune Operation:
+- At each iteration, a population of `N` weight vectors is sampled from the Gaussian policy, the MPC is rolled out for each weight vector and the respective rewards are computed. 
+- The EM update step re-fits the Gaussian to the best-performing samples, adjusting the policy mean towards the weights with the highest rewards.
 
 
 ---
